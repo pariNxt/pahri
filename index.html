@@ -12,16 +12,29 @@
     <style>
         /* Variabel CSS untuk kemudahan perubahan warna */
         :root {
-            --primary-color: #4CAF50; /* Hijau yang segar */
-            --secondary-color: #FFC107; /* Kuning cerah */
-            --dark-text: #2c3e50; /* Teks gelap */
-            --light-text: #ecf0f1; /* Teks terang */
-            --background-light: #f9f9f9;
-            --background-dark: #34495e;
-            --card-background: #ffffff;
-            --border-color: #e0e0e0;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
+            /* Perubahan: Warna primer lebih lembut (Teal/Cyan Gelap) */
+            --primary-color: #00A9B4; /* Dicerahkan sedikit untuk dark mode */
+            /* Perubahan: Warna sekunder lebih elegan (Oranye Emas Lembut) */
+            --secondary-color: #F5B041; 
+            
+            /* --- Perubahan untuk Dark Mode --- */
+            --dark-text: #ecf0f1; /* Teks gelap menjadi terang */
+            --light-text: #2c3e50; /* Teks terang menjadi gelap (untuk elemen yang harus kontras) */
+            
+            /* Perubahan: Latar belakang utama menjadi gelap (Hampir Hitam) */
+            --background-light: #121212; 
+            /* Latar belakang gelap untuk footer tetap (Dark Slate Blue) */
+            --background-dark: #1F1F1F; 
+            
+            /* Perubahan: Latar belakang kartu menjadi abu-abu gelap */
+            --card-background: #2C2C2C; 
+            
+            /* Perubahan: Warna border lebih lembut untuk dark mode */
+            --border-color: #444444; 
+            
+            /* Perubahan: Shadow lebih halus */
+            --shadow-light: rgba(255, 255, 255, 0.05);
+            --shadow-medium: rgba(255, 255, 255, 0.1);
         }
 
         /* --- Global Reset & Typography --- */
@@ -29,16 +42,19 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--background-light);
-            color: var(--dark-text);
+            /* Menggunakan background-light (yang sekarang gelap) */
+            background-color: var(--background-light); 
+            /* Menggunakan dark-text (yang sekarang terang) */
+            color: var(--dark-text); 
             line-height: 1.6;
             -webkit-font-smoothing: antialiased; 
         }
 
         /* --- Header --- */
         header {
-            background-color: var(--primary-color);
-            color: var(--light-text);
+            /* Menggunakan primary color, namun warna teks disesuaikan */
+            background-color: var(--primary-color); 
+            color: var(--dark-text); /* Teks di header menjadi gelap agar kontras dengan primary color yang sedikit cerah */
             padding: 20px 0; 
             text-align: center;
             box-shadow: 0 4px 8px var(--shadow-medium);
@@ -67,7 +83,8 @@
         /* --- Section Styling --- */
         #products h2, #cart-container h2 {
             font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
+            /* Warna H2 menggunakan primary color */
+            color: var(--primary-color); 
             text-align: center;
             margin-bottom: 25px;
             font-size: 1.6em; 
@@ -100,7 +117,8 @@
         }
 
         .product-card {
-            background-color: var(--card-background);
+            /* Menggunakan card-background (yang sekarang abu-abu gelap) */
+            background-color: var(--card-background); 
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 12px var(--shadow-light); 
@@ -126,7 +144,7 @@
         }
         .product-card p {
             font-size: 1em;
-            color: #555;
+            color: #B0B0B0; /* Teks paragraf disesuaikan agar terlihat di latar belakang gelap */
             font-weight: 500;
         }
         
@@ -140,7 +158,7 @@
 
         .product-card button {
             background-color: var(--primary-color);
-            color: var(--light-text);
+            color: var(--dark-text); /* Warna teks tombol disesuaikan */
             border: none;
             padding: 10px 20px;
             border-radius: 25px;
@@ -153,7 +171,8 @@
         }
 
         .product-card button:hover {
-            background-color: #388e3c; 
+            /* Perubahan: Efek hover sesuai primary color baru */
+            background-color: #00878F; 
             transform: translateY(-2px);
         }
         .product-card button i {
@@ -165,6 +184,7 @@
             flex: 1; /* Mengambil 1 bagian */
             min-width: 300px; /* Tetapkan minimum lebar */
             max-width: 350px; /* Lebar maksimum sidebar di desktop */
+            /* Menggunakan card-background (yang sekarang abu-abu gelap) */
             background-color: var(--card-background);
             padding: 20px; 
             border-radius: 10px;
@@ -211,8 +231,9 @@
 
         #cart-container .checkout-btn { 
             width: 100%;
+            /* Warna tombol checkout mengikuti secondary color */
             background-color: var(--secondary-color);
-            color: var(--dark-text);
+            color: var(--light-text); /* Warna teks checkout disesuaikan */
             border: none;
             padding: 12px; 
             border-radius: 25px;
@@ -228,7 +249,8 @@
         }
 
         #cart-container .checkout-btn:hover {
-            background-color: #ffb300; 
+            /* Perubahan: Efek hover sesuai secondary color baru */
+            background-color: #E0A23C; 
             transform: translateY(-2px);
         }
 
@@ -237,7 +259,7 @@
             text-align: center;
             padding: 20px;
             background-color: var(--background-dark);
-            color: var(--light-text);
+            color: var(--dark-text); /* Teks footer menggunakan warna teks terang */
             margin-top: 40px;
             box-shadow: 0 -4px 8px var(--shadow-medium);
         }
@@ -247,7 +269,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #333;
+            background-color: #444; /* Warna latar belakang notifikasi disesuaikan */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -464,4 +486,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
