@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOKO PAHRI</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Variabel CSS untuk kemudahan perubahan warna */
+        :root {
+            --primary-color: #4CAF50; /* Hijau yang segar */
+            --secondary-color: #FFC107; /* Kuning cerah */
+            --dark-text: #2c3e50; /* Teks gelap */
+            --light-text: #ecf0f1; /* Teks terang */
+            --background-light: #f9f9f9;
+            --background-dark: #34495e;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Global Reset & Typography --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased; 
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 20px 0; 
+            text-align: center;
+            box-shadow: 0 4px 8px var(--shadow-medium);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            font-size: 2.2em; 
+            letter-spacing: 1px;
+        }
+        header h1 i {
+            margin-right: 10px;
+        }
+
+        /* --- Main Layout (Diperbaiki) --- */
+        main {
+            display: flex;
+            flex-wrap: wrap; 
+            max-width: 1200px; /* Lebar Maksimum Konten Utama */
+            margin: 30px auto;
+            padding: 0 15px; /* Padding Samping untuk Desktop/Tablet */
+            gap: 25px; 
+        }
+
+        /* --- Section Styling --- */
+        #products h2, #cart-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.6em; 
+            position: relative;
+        }
+        #products h2::after, #cart-container h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -8px; 
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        /* --- Product Grid (Diperbaiki) --- */
+        #products {
+            /* Rasio Produk vs Keranjang: 70% vs 30% di desktop */
+            flex: 3; /* Mengambil 3 bagian */
+            min-width: 65%; /* Agar tetap mengambil mayoritas ruang di desktop */
+        }
+
+        .product-grid {
+            display: grid;
+            /* Grid yang adaptif: 3 kolom di desktop, minimum 250px per kolom */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .product-card {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-light); 
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 15px var(--shadow-medium);
+        }
+
+        .product-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 1.2em; 
+            /* Tambahan: Pastikan teks panjang tidak merusak layout */
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
+        }
+        .product-card p {
+            font-size: 1em;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .product-card img {
+            width: 100%;
+            max-height: 150px; 
+            object-fit: contain; /* Gambar tidak terpotong */
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .product-card button {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card button:hover {
+            background-color: #388e3c; 
+            transform: translateY(-2px);
+        }
+        .product-card button i {
+            margin-right: 8px;
+        }
+
+        /* --- Cart Container (Sidebar) (Diperbaiki) --- */
+        #cart-container {
+            flex: 1; /* Mengambil 1 bagian */
+            min-width: 300px; /* Tetapkan minimum lebar */
+            max-width: 350px; /* Lebar maksimum sidebar di desktop */
+            background-color: var(--card-background);
+            padding: 20px; 
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            height: fit-content; 
+            position: sticky; 
+            top: 20px; 
+            border: 1px solid var(--border-color);
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color); /* Perbaiki garis atas */
+        }
+
+        #cart-items li {
+            padding: 10px 0; 
+            font-size: 0.9em;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #cart-items li:last-child {
+            border-bottom: none;
+        }
+        #cart-items li span {
+            font-weight: 600;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 2px solid var(--primary-color);
+            text-align: right;
+            font-size: 1em;
+        }
+
+        #cart-total {
+            font-size: 1.2em;
+        }
+
+        #cart-container .checkout-btn { 
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: var(--dark-text);
+            border: none;
+            padding: 12px; 
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cart-container .checkout-btn:hover {
+            background-color: #ffb300; 
+            transform: translateY(-2px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--background-dark);
+            color: var(--light-text);
+            margin-top: 40px;
+            box-shadow: 0 -4px 8px var(--shadow-medium);
+        }
+
+        /* --- Notifikasi Toast --- */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            font-size: 0.9em;
+        }
+
+
+        /* ========================================= */
+        /* --- RESPONSIF (Media Queries) --- */
+        /* ========================================= */
+
+        /* Tablet (lebar <= 1024px) */
+        @media (max-width: 1024px) {
+            main {
+                max-width: 95%; /* Konten sedikit lebih lebar */
+                gap: 20px;
+            }
+            #products {
+                flex: 2; /* Produk mengambil lebih banyak ruang */
+                min-width: 50%;
+            }
+            #cart-container {
+                flex: 1;
+                min-width: 250px;
+                max-width: 300px; /* Sedikit dikecilkan */
+            }
+        }
+
+        /* Mobile (lebar <= 768px) */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column; /* Ubah tata letak menjadi vertikal */
+                padding: 0 10px;
+                gap: 30px; /* Jarak antara produk dan keranjang */
+            }
+            
+            #products, #cart-container {
+                flex: none; 
+                width: 100%; /* Ambil lebar penuh */
+                min-width: unset;
+                max-width: none;
+                padding-right: 0;
+            }
+            
+            #cart-container {
+                position: static; /* Hilangkan sticky di mobile */
+            }
+
+            /* Grid Produk menjadi 2 kolom yang sama lebarnya di HP */
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); 
+                gap: 15px;
+            }
+            
+            .product-card h3 { 
+                font-size: 1em; 
+                white-space: normal; /* Biarkan teks produk wrap di HP */
+            }
+            .product-card p { font-size: 0.9em; }
+            .product-card button { font-size: 0.85em; }
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-store"></i>TOKO PAHRI</h1>
+    </header>
+
+    <main>
+        <section id="products">
+            <h2><i class="fas fa-boxes"></i> Produk Unggulan</h2>
+            <div class="product-grid">
+                </div>
+        </section>
+
+        <aside id="cart-container">
+            <h2><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h2>
+            <ul id="cart-items">
+                </ul>
+            <div class="cart-summary">
+                Total: <span id="cart-total">Rp 0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> Checkout Via WhatsApp
+            </button> 
+        </aside>
+    </main>
+
+    <footer>
+        <p><i class="far fa-copyright"></i> 2025 TOKO WEB PAHRI. Dibuat dengan ❤️</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "REDFINGER 7 DAY", price: 24000, image: 'https://files.catbox.moe/w8a22i.png' },
+            { id: 2, name: "REDFINGER 30 DAY", price: 66000, image: 'https://files.catbox.moe/w8a22i.png' },
+            { id: 3, name: "Joki Rod Fish iT", price: 100000, image: 'https://files.catbox.moe/iild77.jpeg' },
+        ];
+
+        let cart = [];
+        const productsGrid = document.querySelector('.product-grid'); 
+        const cartItemsList = document.getElementById('cart-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+        
+        // Nomor WhatsApp tujuan 
+        const WHATSAPP_NUMBER = '6285974263016'; 
+
+        function renderProducts() {
+            productsGrid.innerHTML = ''; 
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" style="width:100%; max-height:150px; object-fit:contain; border-radius:5px; margin-bottom:15px;">
+                    <h3>${product.name}</h3>
+                    <p>Harga: <span style="color:var(--primary-color); font-weight:700;">Rp ${product.price.toLocaleString('id-ID')}</span></p>
+                    <button onclick="addToCart(${product.id})"><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</button>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const cartItem = cart.find(item => item.id === productId);
+
+                if (cartItem) {
+                    cartItem.quantity++; 
+                } else {
+                    cart.push({ ...product, quantity: 1 }); 
+                }
+                
+                renderCart();
+                showNotification(`"${product.name}" ditambahkan!`);
+            }
+        }
+        
+        function renderCart() {
+            cartItemsList.innerHTML = ''; 
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<li>Keranjang kosong.</li>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    const subtotal = item.price * item.quantity;
+                    total += subtotal;
+
+                    listItem.innerHTML = `
+                        ${item.name} (${item.quantity}x) 
+                        <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                });
+            }
+
+            cartTotalSpan.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            return total; 
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Keranjang Anda kosong! Silakan tambahkan produk sebelum checkout.");
+                return;
+            }
+            
+            const total = renderCart(); 
+            
+            let message = "Halo, saya ingin memesan produk berikut:\n\n";
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.quantity}x) @ Rp ${item.price.toLocaleString('id-ID')} = Rp ${(item.price * item.quantity).toLocaleString('id-ID')}\n`;
+            });
+            message += `\n**Total Belanja:** Rp ${total.toLocaleString('id-ID')}\n\nMohon konfirmasi pesanan saya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+            
+            alert("Anda akan diarahkan ke WhatsApp untuk menyelesaikan pemesanan.");
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.classList.add('notification');
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '1';
+            }, 10); 
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.addEventListener('transitionend', () => notification.remove());
+            }, 3000); 
+        }
+
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderCart(); 
+        });
+    </script>
+</body>
+  </html>
